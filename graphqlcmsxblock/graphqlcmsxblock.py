@@ -12,8 +12,8 @@ import re
 class GraphQlCmsXBlock(XBlock):
 
     clauseGraphQlQuery = """ {
-                slug,
                 title,
+                slug,
                 postDate,
                 ... on clauses_clause_Entry {
                     coursetag {
@@ -97,6 +97,22 @@ class GraphQlCmsXBlock(XBlock):
                                     col2, 
                                     col3, 
                                     col4
+                                }
+                            }
+                        }
+                    },
+                    table5colMatrix{
+                        ... on table5colMatrix_matrix5col_BlockType{
+                            id,
+                            tableClassNames,
+                            hasHeaderRow,
+                            table5col{
+                                ... on table5col_BlockType{
+                                    col1, 
+                                    col2, 
+                                    col3, 
+                                    col4,
+                                    col5
                                 }
                             }
                         }
@@ -210,6 +226,22 @@ class GraphQlCmsXBlock(XBlock):
                             }
                         }
                     },
+                     table5colMatrix{
+                        ... on table5colMatrix_matrix5col_BlockType{
+                            id,
+                            tableClassNames,
+                            hasHeaderRow,
+                            table5col{
+                                ... on table5col_BlockType{
+                                    col1, 
+                                    col2, 
+                                    col3, 
+                                    col4,
+                                    col5
+                                }
+                            }
+                        }
+                    },
                     accordionneo{
                         ... on accordionneo_accordion_BlockType{
                             id,
@@ -315,6 +347,22 @@ class GraphQlCmsXBlock(XBlock):
                                     col2, 
                                     col3, 
                                     col4
+                                }
+                            }
+                        }
+                    },
+                    table5colMatrix{
+                        ... on table5colMatrix_matrix5col_BlockType{
+                            id,
+                            tableClassNames,
+                            hasHeaderRow,
+                            table5col{
+                                ... on table5col_BlockType{
+                                    col1, 
+                                    col2, 
+                                    col3, 
+                                    col4,
+                                    col5
                                 }
                             }
                         }
@@ -427,6 +475,22 @@ class GraphQlCmsXBlock(XBlock):
                                 }
                             }
                         }
+                    },
+                    table5colMatrix{
+                        ... on table5colMatrix_matrix5col_BlockType{
+                            id,
+                            tableClassNames,
+                            hasHeaderRow,
+                            table5col{
+                                ... on table5col_BlockType{
+                                    col1, 
+                                    col2, 
+                                    col3, 
+                                    col4,
+                                    col5
+                                }
+                            }
+                        }
                     },                    
                     accordionneo{
                         ... on accordionneo_accordion_BlockType{
@@ -479,6 +543,7 @@ class GraphQlCmsXBlock(XBlock):
             'tables2': [],
             'tables3': [],
             'tables4': [],
+            'tables5': [],
             'accordionneo': []
         }
 
@@ -499,6 +564,7 @@ class GraphQlCmsXBlock(XBlock):
             'tables2': entry['tables2'],
             'tables3': entry['tables3'],
             'tables4': entry['tables4'],
+            'tables5': entry['tables5'],
             'accordionneo': entry['accordionneo']
         })
         frag.add_content(html)
@@ -569,6 +635,7 @@ class GraphQlCmsXBlock(XBlock):
             'tables2': [],
             'tables3': [],
             'tables4': [],
+            'tables5': [],
             'accordionneo': []
         }
         if self.entrySlug is not '':
@@ -592,6 +659,7 @@ class GraphQlCmsXBlock(XBlock):
                 'tables2': entry['tables2'],
                 'tables3': entry['tables3'],
                 'tables4': entry['tables4'],
+                'tables5': entry['tables5'],
                 'accordionneo': entry['accordionneo']
             })
         frag.add_content(html)
@@ -622,6 +690,7 @@ class GraphQlCmsXBlock(XBlock):
         tables2 = []
         tables3 = []
         tables4 = []
+        tables5 = []
         accordionneo = []
 
         if self.entryType == 'clause':    
@@ -672,6 +741,8 @@ class GraphQlCmsXBlock(XBlock):
                                     tables3.append(subitem)
                                 elif 'table4colMatrix' in section:
                                     tables4.append(subitem)
+                                elif 'table5colMatrix' in section:
+                                    tables5.append(subitem)
                                 elif 'accordionneo' in section:
                                     accordionneo.append(subitem)
                                 
@@ -700,6 +771,9 @@ class GraphQlCmsXBlock(XBlock):
                 elif 'table4colMatrix' in section :
                     for subitem in entry[section] :
                         tables4.append(subitem)
+                elif 'table5colMatrix' in section :
+                    for subitem in entry[section] :
+                        tables5.append(subitem)
                 elif 'accordionneo' in section :
                     for subitem in entry[section] :
                         accordionneo.append(subitem)
@@ -715,6 +789,7 @@ class GraphQlCmsXBlock(XBlock):
             'tables2': tables2,
             'tables3': tables3,
             'tables4': tables4,
+            'tables5': tables5,
             'accordionneo' : accordionneo
         }
 
