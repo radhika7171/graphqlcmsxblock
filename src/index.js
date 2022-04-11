@@ -1,30 +1,32 @@
 /* Javascript for MyXBlock. */
-console.log("hello ! message from index.js ");
-import $ from "jquery";
+// import $ from "jquery";
+window.jQuery = $;
+window.$ = $;
 
-function CmsBlock(runtime, element) {
-  console.log("hare ramaa hare ramaa");
-
+window.CmsBlock = function (runtime, element) {
   var handlerUrl = runtime.handlerUrl(element, "select_cms_block");
   var handlerSubSectionUrl = runtime.handlerUrl(
     element,
     "select_cms_block_subsections"
   );
+
   var cmsHost = "";
 
+  // 1) Jquery select the course ---- filter
   $("#courseFilter").on("change", function () {
     var filter = this.value;
     update_entry_options(filter);
   });
 
+  //select entry --> type , slug(requested value)
   $("#entry").on("change", function () {
     var parts = this.value.split("::");
     var type = parts[0];
     var slug = parts[1];
     var request = {};
     request[type] = slug;
-    console.log(request);
 
+    // post content to cmsHost : https://dev.cms.intellcreative.ca
     $.ajax({
       type: "POST",
       url: handlerUrl,
@@ -36,11 +38,12 @@ function CmsBlock(runtime, element) {
     });
   });
 
-  update_entry_options = function (filter) {
+  window.update_entry_options = function (filter) {
     const types = ["clauses", "courses", "lessons", "pages"];
     const singularTypes = ["clause", "course", "lesson", "page"];
 
-    for (index in types) {
+    // options available, selected -->  select entry on basis of selected course
+    for (window.index in types) {
       var typeKey = types[index];
       var singularType = singularTypes[index];
 
@@ -52,6 +55,7 @@ function CmsBlock(runtime, element) {
           (elem.coursetag.length > 0 && elem.coursetag[0].slug == filter)
         ) {
           var option = document.createElement("option");
+
           option.appendChild(document.createTextNode(elem.title));
           option.value = singularType + "::" + elem.slug;
 
@@ -69,7 +73,7 @@ function CmsBlock(runtime, element) {
     }
   };
 
-  render_entry = function (type, entry) {
+  window.render_entry = function (type, entry) {
     switch (type) {
       case "clause":
         $("#generalView")
@@ -149,7 +153,7 @@ function CmsBlock(runtime, element) {
     }
   };
 
-  renderField = function (type, entry) {
+  window.renderField = function (type, entry) {
     if (
       typeof entry[type] == "undefined" ||
       entry[type] == "" ||
@@ -507,7 +511,7 @@ function CmsBlock(runtime, element) {
     return base;
   };
 
-  updateSelection = function (form) {
+  window.updateSelection = function (form) {
     var selection = $(form).serializeArray();
     data = {
       type: $(form).attr("entry-type"),
@@ -519,7 +523,7 @@ function CmsBlock(runtime, element) {
       url: handlerSubSectionUrl,
       data: JSON.stringify(data),
       success: function (result) {
-        console.log(result);
+        console.log("result-->", result);
       },
     });
   };
@@ -528,4 +532,4 @@ function CmsBlock(runtime, element) {
     /* Here's where you'd do things on page load. */
     update_entry_options($("#courseFilter").val());
   });
-}
+};
