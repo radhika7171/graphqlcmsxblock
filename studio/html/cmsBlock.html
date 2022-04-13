@@ -38,44 +38,62 @@
     </script>    
 </div>
 
-<div id="generalView">
-    {% for section in sections %}
-        <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
-            <p>{{ section | safe }}</p>
-        </div>
+
+
+<ul id ="sortableView">
+    <li id ="generalView">
+        {% for section in sections %}
+        <li>
+            <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
+                <p>{{ section | safe }}</p>
+            </div>
+        </li>
     {% endfor %}
     {% for block in contentBlocks %}
+
+    <li>
         <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
             {% if block.blockTitle != null %}
                 <h5>{{ block.blockTitle }}</h5>
             {% endif %}
             <div>{{ block.blockContent | safe }}</div>
         </div>
+    </li>
     {% endfor %}
 
     {% for asset in assets %}
         {% for file in asset.assetfile %}
+        <li>
             <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
                 <img src="{{ cmsHost }}{{ file.url }}" class="img-fluid {{ asset.assetType }}"/>
             </div>
+
+        </li>
         {% endfor %}
     {% endfor %}
 
     {% for faq in faqs %}
+    <li>
         <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
             <h5>{{ faq.question }}</h5>
             <div>{{ faq.answer | safe }}</div>
         </div>
+
+    </li>
     {% endfor %}
 
     {% for tip in tips %}
+    <li>
         <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;" class = "{{ tip.tipCssClass }}"> 
             <h5>{{ tip.tipTitle }}</h5>
             <div>{{ tip.tipContent | safe }}</div>
         </div>
+
+    </li>
     {% endfor %}
 
     {% for table in tables2 %}
+    <li>
         <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
             <table>
                 {% if table.hasHeaderRow.0 == 'yes' %}
@@ -100,9 +118,12 @@
                 {% endif %}
             </table>
         </div>
+
+    </li>
     {% endfor %}
 
     {% for table in tables3 %}
+    <li>
         <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
             <table>
                 {% if table.hasHeaderRow.0 == 'yes' %}
@@ -130,9 +151,12 @@
                 {% endif %}
             </table>
         </div>
+
+    </li>
     {% endfor %}
 
     {% for table in tables4 %}
+    <li>
         <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
             <table>
                 {% if table.hasHeaderRow.0 == 'yes' %}
@@ -163,9 +187,13 @@
                 {% endif %}
             </table>
         </div>
+
+    </li>
     {% endfor %}
     
     {% for table in tables5 %}
+    <li>
+
         <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
             <table>
                 {% if table.hasHeaderRow.0 == 'yes' %}
@@ -176,7 +204,7 @@
                         <th> {{ table.table4col.0.col4 | safe }} </th>
                         <th> {{ table.table4col.0.col5 | safe }} </th>
                     </tr>
-
+    
                     {% for row in table.table5col|slice:"1:" %}
                         <tr>
                             <td> {{ row.col1 | safe }} </td>
@@ -199,9 +227,12 @@
                 {% endif %}
             </table>
         </div>
+    </li>
+
     {% endfor %}
 
     {% for accordion in accordionneo %}
+    <li>
         <div>
             {% if accordion.accordionTitle != null %}
                 <h5>{{ accordion.accordionTitle }}</h5>
@@ -213,6 +244,10 @@
                 </details>
             {% endfor %}
         </div>
+
+    </li>
     {% endfor %}
-    
-</div>
+
+    </li>
+
+</ul>

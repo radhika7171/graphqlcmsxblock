@@ -1,7 +1,8 @@
 /* Javascript for MyXBlock. */
-// import $ from "jquery";
 window.jQuery = $;
 window.$ = $;
+import $ from "jquery";
+import Sortable from "sortablejs";
 
 window.CmsBlock = function (runtime, element) {
   var handlerUrl = runtime.handlerUrl(element, "select_cms_block");
@@ -16,6 +17,7 @@ window.CmsBlock = function (runtime, element) {
   $("#courseFilter").on("change", function () {
     var filter = this.value;
     update_entry_options(filter);
+    sortable_list();
   });
 
   //select entry --> type , slug(requested value)
@@ -37,6 +39,13 @@ window.CmsBlock = function (runtime, element) {
       },
     });
   });
+
+  window.sortable_list = function () {
+    let my_list = document.getElementById("sortableView");
+    new Sortable(my_list, {
+      animation: 150,
+    });
+  };
 
   window.update_entry_options = function (filter) {
     const types = ["clauses", "courses", "lessons", "pages"];
@@ -522,9 +531,7 @@ window.CmsBlock = function (runtime, element) {
       type: "POST",
       url: handlerSubSectionUrl,
       data: JSON.stringify(data),
-      success: function (result) {
-        console.log("result-->", result);
-      },
+      success: function (result) {},
     });
   };
 

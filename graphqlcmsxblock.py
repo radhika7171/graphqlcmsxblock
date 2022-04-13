@@ -577,6 +577,7 @@ class GraphQlCmsXBlock(XBlock):
         """
         The primary view of the LMS Admin - GraphQL CMS XBlock, shown to Autors
         """
+        print("studio view executed")
 
         # Load Course Top Filter
         resp =  requests.post(self.cmsApi, json={
@@ -621,7 +622,6 @@ class GraphQlCmsXBlock(XBlock):
         })
         pages = resp.json()['data']['entries']
         pages.sort(key=lambda x: x['title'], reverse=False)
-        
         # Load Selected Entry
         entry = {
             'coursetag': [],
@@ -665,6 +665,7 @@ class GraphQlCmsXBlock(XBlock):
         frag.add_css(self.resource_string("studio/css/cmsBlock.css"))
         frag.add_javascript(self.resource_string("studio/js/bundle.js"))
         frag.initialize_js('CmsBlock')
+        # print("CmsBlock -->", frag.initialize_js('CmsBlock'))
         return frag
 
 
