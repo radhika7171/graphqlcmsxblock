@@ -5,6 +5,11 @@ import $ from "jquery";
 import Sortable from "sortablejs";
 
 window.CmsBlock = function (runtime, element) {
+  var myList = document.getElementById("generalView");
+  new Sortable(myList, {
+    animation: 150,
+  });
+
   var handlerUrl = runtime.handlerUrl(element, "select_cms_block");
   var handlerSubSectionUrl = runtime.handlerUrl(
     element,
@@ -17,7 +22,6 @@ window.CmsBlock = function (runtime, element) {
   $("#courseFilter").on("change", function () {
     var filter = this.value;
     update_entry_options(filter);
-    sortable_list();
   });
 
   //select entry --> type , slug(requested value)
@@ -39,13 +43,6 @@ window.CmsBlock = function (runtime, element) {
       },
     });
   });
-
-  window.sortable_list = function () {
-    let my_list = document.getElementById("sortableView");
-    new Sortable(my_list, {
-      animation: 150,
-    });
-  };
 
   window.update_entry_options = function (filter) {
     const types = ["clauses", "courses", "lessons", "pages"];
