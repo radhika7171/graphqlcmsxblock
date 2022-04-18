@@ -6,9 +6,28 @@ import Sortable from "sortablejs";
 
 window.CmsBlock = function (runtime, element) {
   var myList = document.getElementById("generalView");
-  new Sortable(myList, {
+  console.log("myList-->", myList);
+  var sortable = Sortable.create(myList, {
     animation: 150,
+    group: "generalView",
+    store: {
+      get: function (sortable) {
+        var order = localStorage.getItem(sortable.options.group.name);
+        console.log("get order-->", order);
+        return order ? order.split("|") : [];
+      },
+      set: function (sortable) {
+        var order = sortable.toArray();
+        console.log("set order -->", order);
+        console.log(order[0]);
+        var setOrder = localStorage.setItem(
+          sortable.options.group.name,
+          order.join("|")
+        );
+      },
+    },
   });
+  console.log("sortable fun--->", sortable);
 
   var handlerUrl = runtime.handlerUrl(element, "select_cms_block");
   var handlerSubSectionUrl = runtime.handlerUrl(

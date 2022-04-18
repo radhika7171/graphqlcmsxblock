@@ -41,7 +41,7 @@
 
 <ul id ="generalView">
 {% for section in sections %}
-    <li>
+    <li id ="sections">
         <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
             <p>{{ section | safe }}</p>
         </div>
@@ -49,7 +49,7 @@
 {% endfor %}
 {% for block in contentBlocks %}
 
-<li>
+<li id ="contentBlocks">
     <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
         {% if block.blockTitle != null %}
             <h5>{{ block.blockTitle }}</h5>
@@ -61,7 +61,7 @@
 
 {% for asset in assets %}
     {% for file in asset.assetfile %}
-    <li>
+    <li id ="asset">
         <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
             <img src="{{ cmsHost }}{{ file.url }}" class="img-fluid {{ asset.assetType }}"/>
         </div>
@@ -71,7 +71,7 @@
 {% endfor %}
 
 {% for faq in faqs %}
-<li>
+<li id ="faqs">
     <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
         <h5>{{ faq.question }}</h5>
         <div>{{ faq.answer | safe }}</div>
@@ -81,7 +81,7 @@
 {% endfor %}
 
 {% for tip in tips %}
-<li>
+<li id ="tips">
     <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;" class = "{{ tip.tipCssClass }}"> 
         <h5>{{ tip.tipTitle }}</h5>
         <div>{{ tip.tipContent | safe }}</div>
@@ -91,7 +91,7 @@
 {% endfor %}
 
 {% for table in tables2 %}
-<li>
+<li id = "tables2">
     <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
         <table>
             {% if table.hasHeaderRow.0 == 'yes' %}
@@ -121,7 +121,7 @@
 {% endfor %}
 
 {% for table in tables3 %}
-<li>
+<li id ="tables3">
     <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
         <table>
             {% if table.hasHeaderRow.0 == 'yes' %}
@@ -154,7 +154,7 @@
 {% endfor %}
 
 {% for table in tables4 %}
-<li>
+<li id ="tables4">
     <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
         <table>
             {% if table.hasHeaderRow.0 == 'yes' %}
@@ -190,7 +190,7 @@
 {% endfor %}
 
 {% for table in tables5 %}
-<li>
+<li id = "tables5">
 
     <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
         <table>
@@ -230,7 +230,7 @@
 {% endfor %}
 
 {% for accordion in accordionneo %}
-<li>
+<li id = "accordionneo">
     <div>
         {% if accordion.accordionTitle != null %}
             <h5>{{ accordion.accordionTitle }}</h5>
