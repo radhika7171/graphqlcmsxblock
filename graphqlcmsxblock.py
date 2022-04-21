@@ -577,7 +577,7 @@ class GraphQlCmsXBlock(XBlock):
         """
         The primary view of the LMS Admin - GraphQL CMS XBlock, shown to Autors
         """
-        print("studio view executed")
+        print( requests)
 
         # Load Course Top Filter
         resp =  requests.post(self.cmsApi, json={
@@ -792,6 +792,10 @@ class GraphQlCmsXBlock(XBlock):
             'tables5': tables5,
             'accordionneo' : accordionneo
         }
+    @XBlock.json_handler
+    def re_sorted_data(self, data,suffix = ''):
+        return{}
+
 
     @XBlock.json_handler
     def select_cms_block(self, data, suffix=''):
