@@ -17,12 +17,10 @@ window.CmsBlock = function (runtime, element) {
   var myList = document.getElementById("generalView");
   var sortable = Sortable.create(myList, {
     animation: 150,
-    // group: "generalView",
+    group: "generalView",
     store: {
       get: function (sortable) {
-        //actual id
-        var element = sortable.el;
-        var order = localStorage.getItem(element);
+        var order = localStorage.getItem(sortable.options.group.name);
         return order ? order.split("|") : [];
       },
       set: function (sortable) {
@@ -31,40 +29,17 @@ window.CmsBlock = function (runtime, element) {
           sortable.options.group.name,
           order.join("|")
         );
-
         $.ajax({
           type: "POST",
           url: handleReSortedDataUrl,
           data: JSON.stringify(order),
-          success: function (data) {
+          success: function (order) {
             cmsHost = data.cmsHost;
           },
         });
       },
     },
   });
-
-  // window.postFun = function (order) {
-  //   console.log("post fun");
-  //   let response = fetch(
-  //     "http://localhost:8000/scenario/graphqlcmsxblock.0/studio_view/",
-  //     {
-  //       method: "POST",
-  //       credentials: "same-origin",
-  //       headers: {
-  //         "Content-type": "application/json",
-  //         Accept: "application/json",
-  //       },
-  //       body: JSON.stringify(order),
-  //     }
-  //   )
-  //     .then((response) => response.json())
-  //     .then((jsonResponse) => {
-  //       console.log("response -->", response);
-  //       console.log("success --->", jsonResponse);
-  //     })
-  //     .catch((err) => console.error("error--->", err));
-  // };
 
   // 1) Jquery select the course ---- filter
   $("#courseFilter").on("change", function () {
