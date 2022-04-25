@@ -21,7 +21,6 @@ window.CmsBlock = function (runtime, element) {
     store: {
       get: function (sortable) {
         var order = localStorage.getItem(sortable.options.group.name);
-        var element = sortable.el;
         return order ? order.split("|") : [];
       },
       set: function (sortable) {

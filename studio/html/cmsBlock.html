@@ -41,9 +41,10 @@
 
 <ul id ="generalView">
 {% for section in sections %}
-    <li data-id ="sections">
-        <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
-            <p>{{ section | safe }}</p>
+<li data-id ="sections" >
+<div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
+    <input type ="checkbox" name = "Section"><label>Include section</label>
+        <p>{{ section | safe }}</p>
         </div>
     </li>
 {% endfor %}
@@ -51,6 +52,7 @@
 {% for block in contentBlocks %}
 <li data-id ="contentBlocks">
     <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
+    <input type ="checkbox" name = "Contentblock"><label>Include Content Block</label>
         {% if block.blockTitle != null %}
             <h5>{{ block.blockTitle }}</h5>
         {% endif %}
@@ -61,8 +63,9 @@
 
 {% for asset in assets %}
 {% for file in asset.assetfile %}
-<li data-id ="asset">
+<li data-id ="cmsAsset">
     <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
+    <input type ="checkbox" name = "cmsAsset"><label>Include Cms Asset</label>
         <img src="{{ cmsHost }}{{ file.url }}" class="img-fluid {{ asset.assetType }}"/>
     </div>
 
@@ -71,8 +74,10 @@
 {% endfor %}
 
 {% for faq in faqs %}
-<li data-id ="faqs">
+<li data-id ="faq">
     <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
+    <input type ="checkbox" name = "faq"><label>Include FAQ</label>
+
         <h5>{{ faq.question }}</h5>
         <div>{{ faq.answer | safe }}</div>
     </div>
@@ -81,8 +86,10 @@
 {% endfor %}
 
 {% for tip in tips %}
-<li data-id ="tips">
-    <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;" class = "{{ tip.tipCssClass }}"> 
+<li data-id ="tip">
+    <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;" class = "{{ tip.tipCssClass }}">
+    <input type ="checkbox" name ="tip"><label>Include Tip</label>
+
         <h5>{{ tip.tipTitle }}</h5>
         <div>{{ tip.tipContent | safe }}</div>
     </div>
@@ -91,8 +98,10 @@
 {% endfor %}
 
 {% for table in tables2 %}
-<li data-id = "tables2">
+<li data-id = "table2colMatrix">
     <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
+    <input type ="checkbox" name =" table2colMatrix"><label>Include Table</label>
+
         <table>
             {% if table.hasHeaderRow.0 == 'yes' %}
                 <tr>
@@ -121,8 +130,10 @@
 {% endfor %}
 
 {% for table in tables3 %}
-<li data-id ="tables3">
+<li data-id ="table3colMatrix">
     <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
+    <input type ="checkbox" name = "table3colMatrix"><label>Include Table</label>
+
         <table>
             {% if table.hasHeaderRow.0 == 'yes' %}
                 <tr>
@@ -154,8 +165,10 @@
 {% endfor %}
 
 {% for table in tables4 %}
-<li data-id ="tables4">
+<li data-id ="table4colMatrix">
     <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
+    <input type ="checkbox" name = "table4colMatrix"><label>Include Table</label>
+
         <table>
             {% if table.hasHeaderRow.0 == 'yes' %}
                 <tr>
@@ -190,9 +203,11 @@
 {% endfor %}
 
 {% for table in tables5 %}
-<li data-id = "tables5">
+<li data-id = "table5colMatrix">
 
     <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
+    <input type ="checkbox" name = "table5colMatrix"><label>Include Table</label>
+
         <table>
             {% if table.hasHeaderRow.0 == 'yes' %}
                 <tr>
@@ -231,7 +246,8 @@
 
 {% for accordion in accordionneo %}
 <li data-id = "accordionneo">
-    <div>
+        <div style="padding: 0.8em; margin: 0.5em; background: lightgray; border-radius: 7px;">
+            <input type ="checkbox" name ="accordionneo"><label>Include Accordionneo</label>
         {% if accordion.accordionTitle != null %}
             <h5>{{ accordion.accordionTitle }}</h5>
         {% endif %}
